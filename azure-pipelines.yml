@@ -32,18 +32,9 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- task: JFrogGenericArtifacts@1
+- task: AzureRmWebAppDeployment@4
   inputs:
-    command: 'Upload'
-    connection: 'JFrog Artifactory'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "*csproj",
-            "target": "/generic-files"
-          }
-        ]
-      }
-    failNoOp: true
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+    PublishProfilePassword: '$(passwd)'
+    packageForLinux: '$(build.artifactStagingDirectory)/**/*.zip'
