@@ -42,3 +42,4 @@ steps:
     PublishProfilePath: '$(pubxml.secureFilePath)'
     PublishProfilePassword: '$(passwd)'
     packageForLinux: '$(build.artifactStagingDirectory)/**/*.zip'
+    DeploymentType: zipDeploy
