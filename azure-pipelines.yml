@@ -32,9 +32,13 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: DownloadSecureFile@1
+  name: pubxml
+  inputs:
+    secureFile: 'akswebapp1209 - Zip Deploy.pubxml'
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'PublishProfile'
-    PublishProfilePath: '$(System.DefaultWorkingDirectory)/*.pubxml'
+    PublishProfilePath: '$(pubxml.secureFilePath)'
     PublishProfilePassword: '$(passwd)'
     packageForLinux: '$(build.artifactStagingDirectory)/**/*.zip'
